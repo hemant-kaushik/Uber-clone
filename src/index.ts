@@ -1,15 +1,9 @@
 import dotenv from 'dotenv';
 import { dbConnect } from './db/connection.js';
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
 import app from './app.js';
 
-// Get current file's directory
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-// Configure environment variables
 const result = dotenv.config({
-    path: resolve(__dirname, '../.env')
+    path: './.env'
 });
 
 if (result.error) {
@@ -19,9 +13,9 @@ if (result.error) {
 
 const PORT = process.env.PORT;
 // db connection
-await dbConnect();
+dbConnect();
 
 // server connection
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port : ${PORT}`);
 });
